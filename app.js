@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser')
+const cors = require('cors')
 
 // dotenv config
 require('dotenv').config()
@@ -10,6 +11,7 @@ const app = express();
 //middlewares
 app.use(express.urlencoded({extended: false}))
 app.use(cookieParser())
+app.use(cors())
 
 // database and server config
 require('./config/dbConfig')()

@@ -5,7 +5,8 @@ const checkJwtAuth = require('../../config/jwtAuth');
 
 
 router.get('/login', appController.login)
-router.get('/data',checkJwtAuth, appController.data)
+router.get('/data',checkJwtAuth, appController.data) 
+router.post('/signup', appController.signUp)
 router.get('/logout', appController.logOut)
 
 module.exports = router
