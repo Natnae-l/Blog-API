@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../userController');
+const postController = require('../postController');
 const checkJwtAuth = require('../../config/jwtAuth');
 
 // user routes
@@ -10,7 +11,8 @@ router.get('/logout', checkJwtAuth, userController.logOut)
 
 
 // post routes
-router.get('/post',checkJwtAuth, userController.post) 
+router.get('/post', postController.getInfo) 
+router.post('/post', postController.postInfo)
 
 
 module.exports = router

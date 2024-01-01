@@ -10,7 +10,7 @@ login = async (req, res, next) => {
         }) 
         if (user){
             if(user.password == password){
-                const token = jwt.sign({name: username}, process.env.secretJWT);
+                const token = jwt.sign({username, _id: user._id}, process.env.secretJWT);
                 res.cookie('token', token, {
                     httpOnly: true
                 })
@@ -35,11 +35,6 @@ signUp = async (req, res, next) => {
     }
 }
 
-post = async (req, res, next) => {
-    res.send({
-        data: 'authorized'
-    })
-}
 logOut = async (req, res, next) => {
     res.cookie("token", '')
     res.send("you're logged out!")
@@ -47,5 +42,5 @@ logOut = async (req, res, next) => {
 
 
 module.exports = {
-    login, post, logOut, signUp
+    login, logOut, signUp
 }
