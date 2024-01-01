@@ -13,6 +13,8 @@ router.get('/logout', checkJwtAuth, userController.logOut)
 // post routes
 router.get('/post', postController.getInfo) 
 router.post('/post', postController.postInfo)
+router.get('/:post/comment', postController.getComment)
+router.post('/:post/comment', postController.postComment)
 
 
 module.exports = router

@@ -20,7 +20,16 @@ postInfo = async (req, res, next) => {
     
 }
 postComment = async (req, res, next) => {
-    
+    let {body} = req.body
+    let post = req.params.post
+        console.log(req.params)
+    try {
+        let newcomment = new Comment({post, body}) 
+        newcomment = await newcomment.save()
+        res.send(newcomment)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 // get controllers
@@ -28,8 +37,17 @@ getInfo = async (req, res, next) => {
     let info = await Post.find();
     res.json(info)
 }
+getComment = async (req, res, next) => {
+    try {
+        let comment = await Comment.find({post: req.params.post});
+        res.json(comment)
+    } catch (error) {
+        console.log(error)
+    }
+    
+}
 
 
 module.exports = {
-    postInfo, postComment, getInfo
+    postInfo, postComment, getInfo, getComment
 }
