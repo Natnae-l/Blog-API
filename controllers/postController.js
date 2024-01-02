@@ -5,14 +5,13 @@ const jwt = require('jsonwebtoken')
 
 // post controllers
 postInfo = async (req, res, next) => {
-    let {title, description, published = false} = req.body
+    let {title, description} = req.body
 
-    // let token = req.cookies.token
-    // const user = jwt.verify(token, process.env.secretJWT)._id
-    const user = "6592a53434861eba3bdbe1a2" ;
+    let token = req.cookies.token
+    const user = jwt.verify(token, process.env.secretJWT)._id
     
     try {
-        let newPost = new Post({title, description, user, published}) 
+        let newPost = new Post({title, description, user, published: false}) 
         newPost = await newPost.save()
         res.send(newPost)
     } catch (error) {
